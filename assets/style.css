@@ -1,0 +1,146 @@
+/* Streamlit Custom Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;700&display=swap');
+
+:root {
+  --bg-color: #201a12;
+  --gold: #c9a84c;
+  --teal: #00c9a7;
+  --crimson: #c94040;
+  --sapph: #4070c9;
+  --emerald: #40a870;
+  --ink: #e8dcc8;
+  --muted: #a09070;
+  --glass: rgba(232, 220, 200, 0.05);
+  --glass-border: rgba(201, 168, 76, 0.2);
+}
+
+.stApp {
+    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--gold);
+}
+
+/* Glow Cards */
+.glow-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 24px;
+}
+
+.glow-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+}
+
+.glow-card-title {
+    color: var(--gold);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    padding-bottom: 8px;
+}
+
+/* Metric Display */
+.metric-container {
+    text-align: center;
+}
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+}
+.metric-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.gold-text { color: var(--gold); }
+.teal-text { color: var(--teal); }
+.sapph-text { color: var(--sapph); }
+.crimson-text { color: var(--crimson); }
+.emerald-text { color: var(--emerald); }
+
+/* Finding Seal */
+.finding-seal {
+    display: flex;
+    align-items: flex-start;
+    background: rgba(201, 168, 76, 0.05);
+    border-left: 4px solid var(--gold);
+    padding: 16px;
+    margin-top: 24px;
+    border-radius: 0 8px 8px 0;
+}
+.finding-seal-icon {
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-right: 16px;
+}
+.finding-seal-text {
+    font-size: 1rem;
+    color: var(--ink);
+    line-height: 1.5;
+}
+
+/* Narrative Box */
+.narrative-box {
+    font-size: 1.1rem;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    padding: 20px;
+    border: 1px dashed rgba(160, 144, 112, 0.4);
+    border-radius: 8px;
+    font-style: italic;
+}
+
+/* Sidebar Override - Hide completely for book format */
+[data-testid="collapsedControl"] {
+    display: none !important;
+}
+section[data-testid="stSidebar"] {
+    display: none !important;
+}
+
+/* Orb */
+.orb-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.orb {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    transition: all 0.5s ease;
+}
+.orb.low-risk {
+    background: radial-gradient(circle at 30% 30%, #40a870, #1a4d33);
+    box-shadow: 0 0 30px rgba(64, 168, 112, 0.6);
+}
+.orb.high-risk {
+    background: radial-gradient(circle at 30% 30%, #c94040, #5c1818);
+    box-shadow: 0 0 30px rgba(201, 64, 64, 0.6);
+}
