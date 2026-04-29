@@ -27,26 +27,53 @@ An enterprise-grade, interactive credit risk analysis dashboard built with **Pyt
 ### 1. Clone & install dependencies
 
 ```bash
-git clone https://github.com/<your-username>/credit-risk-dashboard.git
-cd credit-risk-dashboard
+git clone https://github.com/sunandahs05/Credit-Risk-Analyzer.git
+cd Credit-Risk-Analyzer
 pip install -r requirements.txt
 ```
 
-### 2. Prepare the data
+### 2. Download the raw data
 
-The processed data files (`.pkl`) are **not included** in this repo due to size (~650 MB). To generate them:
+The raw data comes from the [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk/data) Kaggle competition. You need **3 files**:
+
+| File | Description |
+|---|---|
+| `application_train.csv` | Main application table (307,511 rows) |
+| `bureau.csv` | Credit Bureau loan history |
+| `installments_payments.csv` | Previous loan installment records |
+
+Download them and place them in a `data/raw/` folder **one level above** this project:
+
+```
+parent-directory/
+├── data/
+│   └── raw/
+│       ├── application_train.csv    ← place here
+│       ├── bureau.csv               ← place here
+│       └── installments_payments.csv← place here
+└── Credit-Risk-Analyzer/            ← this repo
+    ├── app.py
+    └── ...
+```
+
+> **NPA Data**: India's Non-Performing Asset ratios are fetched automatically from the [World Bank API](https://data.worldbank.org/indicator/FB.AST.NPER.ZS) (indicator `FB.AST.NPER.ZS`). If the API is unreachable, a hardcoded fallback dataset is used.
+
+### 3. Run the pipeline
+
+This processes raw data → engineered features → trained models:
 
 ```bash
 python scripts/pipeline.py
 ```
 
 This will:
-- Download raw data via `scripts/data_acquisition.py`
-- Engineer features via `scripts/feature_engineering.py`
-- Train all models via `scripts/model_training.py`
+- Merge and aggregate the 3 raw tables into a master dataset
+- Engineer 17 predictive features (DTI, late payment rate, etc.)
+- Train Lasso Logistic Regression, pruned CART, and XGBoost
+- Calibrate probabilities and run a full fairness audit
 - Save all artifacts to `data/processed/`
 
-### 3. Run the dashboard
+### 4. Run the dashboard
 
 ```bash
 streamlit run app.py
